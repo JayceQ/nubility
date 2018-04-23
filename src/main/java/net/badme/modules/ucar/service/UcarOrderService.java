@@ -2,7 +2,7 @@ package net.badme.modules.ucar.service;
 
 import com.baomidou.mybatisplus.service.IService;
 import net.badme.common.utils.PageUtils;
-import net.badme.modules.ucar.entity.OrderEntity;
+import net.badme.modules.ucar.entity.UcarOrderEntity;
 
 import java.util.Map;
 
@@ -11,10 +11,12 @@ import java.util.Map;
  *
  * @author Jayce
  * @email qinxune@gmail.com
- * @date 2018-04-22 21:04:18
+ * @date 2018-04-23 21:41:25
  */
-public interface OrderService extends IService<OrderEntity> {
+public interface UcarOrderService extends IService<UcarOrderEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
+
+    void save(UcarOrderEntity order);
 }
 

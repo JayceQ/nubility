@@ -11,10 +11,10 @@ import java.util.Date;
  * 
  * @author Jayce
  * @email qinxune@gmail.com
- * @date 2018-04-22 21:04:18
+ * @date 2018-04-23 21:41:25
  */
-@TableName("order")
-public class OrderEntity implements Serializable {
+@TableName("ucar_order")
+public class UcarOrderEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -42,6 +42,10 @@ public class OrderEntity implements Serializable {
 	 * 描述
 	 */
 	private String desc;
+	/**
+	 * 来源
+	 */
+	private String origin;
 	/**
 	 * 备注
 	 */
@@ -126,6 +130,18 @@ public class OrderEntity implements Serializable {
 	 */
 	public String getDesc() {
 		return desc;
+	}
+	/**
+	 * 设置：来源
+	 */
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	/**
+	 * 获取：来源
+	 */
+	public String getOrigin() {
+		return origin;
 	}
 	/**
 	 * 设置：备注

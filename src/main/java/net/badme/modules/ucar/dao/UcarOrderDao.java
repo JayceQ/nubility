@@ -1,6 +1,6 @@
 package net.badme.modules.ucar.dao;
 
-import net.badme.modules.ucar.entity.OrderEntity;
+import net.badme.modules.ucar.entity.UcarOrderEntity;
 import com.baomidou.mybatisplus.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,9 +9,9 @@ import org.apache.ibatis.annotations.Mapper;
  * 
  * @author Jayce
  * @email qinxune@gmail.com
- * @date 2018-04-22 21:04:18
+ * @date 2018-04-23 21:41:25
  */
 @Mapper
-public interface OrderDao extends BaseMapper<OrderEntity> {
+public interface UcarOrderDao extends BaseMapper<UcarOrderEntity> {
 	
 }

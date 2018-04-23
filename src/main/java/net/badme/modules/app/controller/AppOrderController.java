@@ -2,19 +2,16 @@ package net.badme.modules.app.controller;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import net.badme.common.utils.DateUtils;
-import net.badme.common.utils.PageUtils;
 import net.badme.common.utils.R;
-import net.badme.modules.ucar.entity.OrderEntity;
-import net.badme.modules.ucar.service.OrderService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
+import net.badme.modules.ucar.entity.UcarOrderEntity;
+import net.badme.modules.ucar.service.UcarOrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.Map;
 
 
 /**
@@ -29,22 +26,20 @@ import java.util.Map;
 @Api("APP测试接口")
 public class AppOrderController {
     @Autowired
-    private OrderService orderService;
-
-    @GetMapping("notToken")
-    @ApiOperation("忽略Token验证测试")
-    public R notToken(){
-        return R.ok().put("msg", "无需token也能访问。。。");
-    }
+    private UcarOrderService orderService;
 
     @GetMapping("countOrder")
     @ApiOperation("忽略Token验证测试")
     public R save(HttpServletRequest request){
-        System.out.println(DateUtils.format(new Date(),"yyyy-MM-dd HH:mm:ss"));
-        System.out.println(request.getParameter("applyMobile"));
-        System.out.println(request.getParameter("recommendMobile"));
-        System.out.println(request.getRequestURL());
-        System.out.println(request.getHeader("user-agent"));
+        UcarOrderEntity order  = new UcarOrderEntity();
+        order.setOrderName("优卡白条");
+        order.setApplyMobile(request.getParameter("applyMobile"));
+        order.setRecommendMobile(request.getParameter("recommendMobile"));
+        //order.setStatus(0);
+        order.setCreateTime(new Date());
+        String agent = request.getHeader("user-agent");
+        order.setOrigin(agent.indexOf("Android")>0?"安卓":agent.indexOf("iPhone")>0?"苹果":"其他");
+        orderService.save(order);
         return R.ok();
     }
 

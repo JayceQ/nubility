@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="net.badme.modules.ucar.dao.UcarOrderDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="net.badme.modules.ucar.entity.UcarOrderEntity" id="ucarOrderMap">
+        <result property="orderId" column="order_id"/>
+        <result property="orderName" column="order_name"/>
+        <result property="recommendMobile" column="recommend_mobile"/>
+        <result property="applyMobile" column="apply_mobile"/>
+        <result property="status" column="status"/>
+        <result property="desc" column="desc"/>
+        <result property="origin" column="origin"/>
+        <result property="remark" column="remark"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+
+</mapper>
