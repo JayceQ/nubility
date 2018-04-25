@@ -1,5 +1,6 @@
 package net.badme.modules.ucar.service.impl;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Map;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -15,6 +16,8 @@ import net.badme.modules.ucar.service.UcarOrderService;
 
 @Service("ucarOrderService")
 public class UcarOrderServiceImpl extends ServiceImpl<UcarOrderDao, UcarOrderEntity> implements UcarOrderService {
+    @Autowired
+    private UcarOrderDao orderDao;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -29,6 +32,11 @@ public class UcarOrderServiceImpl extends ServiceImpl<UcarOrderDao, UcarOrderEnt
     @Override
     public void save(UcarOrderEntity order) {
         this.insert(order);
+    }
+
+    @Override
+    public void updateStatus(UcarOrderEntity ucarOrder) {
+        orderDao.updateStatus(ucarOrder);
     }
 
 }

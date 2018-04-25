@@ -38,7 +38,6 @@ public class UcarOrderController {
     @RequiresPermissions("ucar:order:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = ucarOrderService.queryPage(params);
-
         return R.ok().put("page", page);
     }
 
@@ -71,8 +70,9 @@ public class UcarOrderController {
     @RequestMapping("/update")
     @RequiresPermissions("ucar:order:update")
     public R update(@RequestBody UcarOrderEntity ucarOrder){
-			ucarOrderService.updateById(ucarOrder);
-
+        System.out.println(ucarOrder.getStatus()+"___"+ucarOrder.getOrderId());
+        ucarOrder.setStatus(ucarOrder.getStatus() == 0 ? 1 : 0);
+        ucarOrderService.updateStatus(ucarOrder);
         return R.ok();
     }
 

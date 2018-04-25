@@ -17,5 +17,7 @@
         <result property="modifyTime" column="modify_time"/>
     </resultMap>
 
-
+    <update id="updateStatus" parameterType="net.badme.modules.ucar.entity.UcarOrderEntity">
+        UPDATE `ucar_order` SET `status` = #{status} where order_id = #{orderId}
+    </update>
 </mapper>

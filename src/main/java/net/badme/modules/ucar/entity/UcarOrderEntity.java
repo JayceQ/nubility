@@ -26,6 +26,23 @@ public class UcarOrderEntity implements Serializable {
 	 * 订单名
 	 */
 	private String orderName;
+
+	@Override
+	public String toString() {
+		return "UcarOrderEntity{" +
+				"orderId=" + orderId +
+				", orderName='" + orderName + '\'' +
+				", recommendMobile='" + recommendMobile + '\'' +
+				", applyMobile='" + applyMobile + '\'' +
+				", status=" + status +
+				", desc='" + desc + '\'' +
+				", origin='" + origin + '\'' +
+				", remark='" + remark + '\'' +
+				", createTime=" + createTime +
+				", modifyTime=" + modifyTime +
+				'}';
+	}
+
 	/**
 	 * 推荐人号码
 	 */

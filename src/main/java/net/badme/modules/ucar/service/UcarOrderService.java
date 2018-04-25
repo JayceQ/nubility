@@ -18,5 +18,7 @@ public interface UcarOrderService extends IService<UcarOrderEntity> {
     PageUtils queryPage(Map<String, Object> params);
 
     void save(UcarOrderEntity order);
+
+    void updateStatus(UcarOrderEntity ucarOrder);
 }
 
