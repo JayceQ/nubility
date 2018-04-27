@@ -79,6 +79,17 @@ public class SysUserEntity implements Serializable {
 	 */
 	private Date createTime;
 
+	public String getChineseName() {
+		return chineseName;
+	}
+
+	public void setChineseName(String chineseName) {
+		this.chineseName = chineseName;
+	}
+
+	private String chineseName;
+
+
 	/**
 	 * 设置：
 	 * @param userId 

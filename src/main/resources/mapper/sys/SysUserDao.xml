@@ -21,4 +21,8 @@
 		select * from sys_user where username = #{username}
 	</select>
 
+	<select id="selectByPhone" resultType="net.badme.modules.sys.entity.SysUserEntity">
+		select * from sys_user where mobile = #{mobile}
+	</select>
+
 </mapper>

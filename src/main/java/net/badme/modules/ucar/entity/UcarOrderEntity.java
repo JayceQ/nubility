@@ -76,6 +76,16 @@ public class UcarOrderEntity implements Serializable {
 	 */
 	private Date modifyTime;
 
+	private String recommendName;
+
+	public String getRecommendName() {
+		return recommendName;
+	}
+
+	public void setRecommendName(String recommendName) {
+		this.recommendName = recommendName;
+	}
+
 	/**
 	 * 设置：
 	 */

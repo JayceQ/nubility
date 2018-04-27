@@ -32,4 +32,5 @@ public interface SysUserDao extends BaseMapper<SysUserEntity> {
 	 */
 	SysUserEntity queryByUserName(String username);
 
+    SysUserEntity selectByPhone(String recommendMobile);
 }

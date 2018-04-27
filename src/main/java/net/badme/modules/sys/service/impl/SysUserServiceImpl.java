@@ -36,6 +36,8 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 	private SysUserRoleService sysUserRoleService;
 	@Autowired
 	private SysRoleService sysRoleService;
+	@Autowired
+	private SysUserDao sysUserDao;
 
 	@Override
 	public PageUtils queryPage(Map<String, Object> params) {
@@ -113,7 +115,12 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 		return this.update(userEntity,
 				new EntityWrapper<SysUserEntity>().eq("user_id", userId).eq("password", password));
 	}
-	
+
+	@Override
+	public SysUserEntity selectByPhone(String recommendMobile) {
+		return sysUserDao.selectByPhone(recommendMobile);
+	}
+
 	/**
 	 * 检查角色是否越权
 	 */

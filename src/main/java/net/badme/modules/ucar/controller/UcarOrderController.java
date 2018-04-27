@@ -1,8 +1,12 @@
 package net.badme.modules.ucar.controller;
 
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import net.badme.modules.sys.entity.SysUserEntity;
+import net.badme.modules.sys.service.SysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +34,9 @@ import net.badme.common.utils.R;
 public class UcarOrderController {
     @Autowired
     private UcarOrderService ucarOrderService;
+
+    @Autowired
+    private SysUserService sysUserService;
 
     /**
      * 列表
@@ -72,6 +79,7 @@ public class UcarOrderController {
     public R update(@RequestBody UcarOrderEntity ucarOrder){
         System.out.println(ucarOrder.getStatus()+"___"+ucarOrder.getOrderId());
         ucarOrder.setStatus(ucarOrder.getStatus() == 0 ? 1 : 0);
+        ucarOrder.setModifyTime(new Date());
         ucarOrderService.updateStatus(ucarOrder);
         return R.ok();
     }
