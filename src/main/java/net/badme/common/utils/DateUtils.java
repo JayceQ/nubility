@@ -173,4 +173,13 @@ public class DateUtils {
         DateTime dateTime = new DateTime(date);
         return dateTime.plusYears(years).toDate();
     }
+
+    /**
+     * 时间戳转日期
+     */
+    public static String timestampToDate(long timestamp){
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(DATE_TIME_PATTERN);
+        Date date = new Date(timestamp);
+        return simpleDateFormat.format(date);
+    }
 }

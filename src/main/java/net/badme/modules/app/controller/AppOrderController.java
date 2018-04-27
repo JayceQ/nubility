@@ -42,7 +42,7 @@ public class AppOrderController {
         String recommendMobile = request.getParameter("recommendMobile");
         SysUserEntity user = sysUserService.selectByPhone(recommendMobile);
         if(user == null){
-            return R.error(400,"没有此荐人！");
+            return R.error(400,"没有此推荐人！");
         }
         order.setRecommendName(user.getChineseName());
         order.setRecommendMobile(recommendMobile);
@@ -55,3 +55,4 @@ public class AppOrderController {
 
 
 }
+

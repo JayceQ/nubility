@@ -40,6 +40,7 @@ public class SysLogServiceImpl extends ServiceImpl<SysLogDao, SysLogEntity> impl
         Page<SysLogEntity> page = this.selectPage(
             new Query<SysLogEntity>(params).getPage(),
             new EntityWrapper<SysLogEntity>().like(StringUtils.isNotBlank(key),"username", key)
+                .orNew().like(StringUtils.isNotBlank(key),"operation", key)
         );
 
         return new PageUtils(page);
