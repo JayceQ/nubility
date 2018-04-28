@@ -37,7 +37,7 @@ public class UcarOrderServiceImpl extends ServiceImpl<UcarOrderDao, UcarOrderEnt
                 new Query<UcarOrderEntity>(params).getPage(),
                 new EntityWrapper<UcarOrderEntity>().like(StringUtils.isNotBlank(key),"recommend_name", key)
                 .or().like(StringUtils.isNotBlank(key),"recommend_mobile", key)
-                        .andNew().between( "create_time",start2,end2)
+                        .andNew().between( "create_time",start2,end2).orderBy("create_time",false)
         );
 
         return new PageUtils(page);
