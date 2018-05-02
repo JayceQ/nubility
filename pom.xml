@@ -36,6 +36,7 @@
 		<qcloud.cos.version>4.4</qcloud.cos.version>
 		<swagger.version>2.2.2</swagger.version>
 		<joda.time.version>2.9.9</joda.time.version>
+		<google.zxing.version>3.3.0</google.zxing.version>
 
 		<!--wagon plugin 配置-->
 		<service-path>/work/ucar</service-path>
@@ -188,6 +189,16 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>${joda.time.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>core</artifactId>
+			<version>${google.zxing.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>com.google.zxing</groupId>
+			<artifactId>javase</artifactId>
+			<version>${google.zxing.version}</version>
 		</dependency>
 	</dependencies>
 

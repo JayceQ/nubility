@@ -1,25 +1,32 @@
 package net.badme.modules.ucar.controller;
 
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
+import net.badme.common.utils.DownloadUtils;
+import net.badme.common.utils.PageUtils;
+import net.badme.common.utils.QRCodeUtils;
+import net.badme.common.utils.R;
 import net.badme.modules.sys.entity.SysUserEntity;
 import net.badme.modules.sys.service.SysUserService;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
 import net.badme.modules.ucar.entity.UcarOrderEntity;
 import net.badme.modules.ucar.service.UcarOrderService;
-import net.badme.common.utils.PageUtils;
-import net.badme.common.utils.R;
+import org.apache.commons.io.FileUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import javax.imageio.ImageIO;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.awt.image.BufferedImage;
+import java.io.*;
+import java.net.URLEncoder;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.Map;
 
 
 /**
@@ -92,6 +99,39 @@ public class UcarOrderController {
     public R delete(@RequestBody Long[] orderIds){
 			ucarOrderService.deleteBatchIds(Arrays.asList(orderIds));
 
+        return R.ok();
+    }
+    /**
+     * 删除
+     */
+    @RequestMapping("/createQRCode")
+    @RequiresPermissions("ucar:order:QRCode")
+    public R createQRCode(@RequestParam Map<String, Object> params,HttpServletRequest request, HttpServletResponse response){
+        //SysUserEntity sysUserEntity = sysUserService.selectById(Long.parseLong((String)params.get("userId")));
+        SysUserEntity sysUserEntity = sysUserService.selectById(Long.parseLong(request.getParameter("userId")));
+        String mobile = sysUserEntity.getMobile();
+        String content = "http://badme.net/scan.html?recommend="+ mobile;
+        String destPath = System.getProperty("user.dir") + "/data/image/logo.png";
+        String fileName = sysUserEntity.getChineseName()+".jpg";
+        String agent = request.getHeader("User-Agent");
+        try{
+            BufferedImage image = QRCodeUtils.createImage(content,destPath,true);
+            if (agent.contains("Foxfire")) {
+                //火狐浏览器默认base64编码
+                fileName= DownloadUtils.base64EncodeFileName(fileName);
+            }else{
+                fileName= URLEncoder.encode(fileName, "utf-8");
+                //将编码后的文件名中的+换成空格
+                fileName=fileName.replace("+", " ");
+            }
+            response.setContentType("image/jpeg");
+            response.setHeader("Content-Disposition","attachment;filename="+fileName);
+            OutputStream os = response.getOutputStream();
+            ImageIO.write(image, "jpg", os);
+        }catch (Exception e){
+            e.printStackTrace();
+            return R.error("生成失败，请重试");
+        }
         return R.ok();
     }
 
