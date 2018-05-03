@@ -27,18 +27,28 @@ public class UcarOrderServiceImpl extends ServiceImpl<UcarOrderDao, UcarOrderEnt
         String key = (String)params.get("key");
         String start = (String)params.get("start");
         String end = (String)params.get("end");
+        String status = (String)params.get("status");
         Date start2 = new Date(0);
         Date end2 = new Date(2124467175000L);
         if(start != null && end != null){
             start2 =new Date(Long.parseLong(start)) ;
             end2 = new Date(Long.parseLong(end));
         }
-        Page<UcarOrderEntity> page = this.selectPage(
-                new Query<UcarOrderEntity>(params).getPage(),
-                new EntityWrapper<UcarOrderEntity>().like(StringUtils.isNotBlank(key),"recommend_name", key)
-                .or().like(StringUtils.isNotBlank(key),"recommend_mobile", key)
-                        .andNew().between( "create_time",start2,end2).orderBy("create_time",false)
-        );
+        Page<UcarOrderEntity> page = null;
+        if(StringUtils.isNotBlank(status)){
+           page =  this.selectPage(
+                    new Query<UcarOrderEntity>(params).getPage(),
+                    new EntityWrapper<UcarOrderEntity>().like(StringUtils.isNotBlank(key),"recommend_name", key)
+                            .or().like(StringUtils.isNotBlank(key),"recommend_mobile", key)
+                            .andNew().eq("status",Integer.parseInt(status))
+                            .andNew().between( "create_time",start2,end2).orderBy("create_time",false));
+        }else{
+           page =  this.selectPage(
+                    new Query<UcarOrderEntity>(params).getPage(),
+                    new EntityWrapper<UcarOrderEntity>().like(StringUtils.isNotBlank(key),"recommend_name", key)
+                            .or().like(StringUtils.isNotBlank(key),"recommend_mobile", key)
+                            .andNew().between( "create_time",start2,end2).orderBy("create_time",false));
+        }
 
         return new PageUtils(page);
     }

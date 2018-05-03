@@ -8,21 +8,16 @@ import net.badme.modules.sys.entity.SysUserEntity;
 import net.badme.modules.sys.service.SysUserService;
 import net.badme.modules.ucar.entity.UcarOrderEntity;
 import net.badme.modules.ucar.service.UcarOrderService;
-import org.apache.commons.io.FileUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Date;
@@ -111,10 +106,14 @@ public class UcarOrderController {
         SysUserEntity sysUserEntity = sysUserService.selectById(Long.parseLong(request.getParameter("userId")));
         String mobile = sysUserEntity.getMobile();
         String content = "http://badme.net/scan.html?recommend="+ mobile;
-        String destPath = System.getProperty("user.dir") + "/data/image/logo.png";
+        //String destPath = System.getProperty("user.dir") + "/static/logo.png";
+        //String destPath = System.getProperty("user.dir") + "/BOOT-INF/classes/static/logo.png";
+        System.out.println("-------------------"+System.getProperty("user.dir"));
+        System.out.println("-------------------"+request.getServletContext().getRealPath("/"));
         String fileName = sysUserEntity.getChineseName()+".jpg";
         String agent = request.getHeader("User-Agent");
         try{
+            String destPath = ResourceUtils.getURL("classpath:").getPath()+"/static/logo.png";
             BufferedImage image = QRCodeUtils.createImage(content,destPath,true);
             if (agent.contains("Foxfire")) {
                 //火狐浏览器默认base64编码
