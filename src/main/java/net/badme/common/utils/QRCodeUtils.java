@@ -247,7 +247,7 @@ public class QRCodeUtils {
     public static void main(String[] args)  {
 
         // 生成二维码
-        String text = "https://www.baidu.com/";
+        String text = "http://badme.net/scan.html?recommend=15272122535";
         String imagePath = System.getProperty("user.dir") + "/data/image/logo.png";
         String destPath = System.getProperty("user.dir") + "/data/image/";
         try{
