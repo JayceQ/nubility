@@ -110,6 +110,7 @@ public class UcarOrderController {
         String agent = request.getHeader("User-Agent");
         try{
             String destPath = "/var/www/release/dist/logo.png";
+            //String destPath = "C:/Users/Jayce/Desktop/logo.png";
             BufferedImage image = QRCodeUtils.createImage(content,destPath,true);
             if (agent.contains("Foxfire")) {
                 //火狐浏览器默认base64编码
