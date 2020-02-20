@@ -111,6 +111,16 @@ public class SysUserController extends AbstractController {
 		
 		return R.ok();
 	}
+
+	/**
+	 * 注册用户
+	 */
+	@PostMapping("/register")
+	public R register(@RequestBody SysUserEntity user){
+		user.setCreateUserId(1l);
+		sysUserService.register(user);
+		return R.ok();
+	}
 	
 	/**
 	 * 修改用户
@@ -146,4 +156,7 @@ public class SysUserController extends AbstractController {
 		
 		return R.ok();
 	}
+
+
+
 }

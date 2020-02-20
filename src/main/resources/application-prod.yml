@@ -4,12 +4,12 @@ spring:
         driverClassName: com.mysql.jdbc.Driver
         druid:
             first:
-                url: jdbc:mysql://localhost:3306/ucar-release?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-                username: ucar
+                url: jdbc:mysql://localhost:3306/ucar?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+                username: root
                 password: P@ssw0rd
             second:
-                url: jdbc:mysql://localhost:3306/ucar-release?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
-                username: ucar
+                url: jdbc:mysql://localhost:3306/ucar?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8
+                username: root
                 password: P@ssw0rd
             initial-size: 10
             max-active: 100

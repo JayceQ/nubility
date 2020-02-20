@@ -36,7 +36,7 @@ public class SwaggerConfig extends WebMvcConfigurerAdapter {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("人人开源")
+            .title("")
             .description("ucar-fast文档")
             .termsOfServiceUrl("http://www.ucar.io")
             .version("2.0")
